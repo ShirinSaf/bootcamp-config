@@ -53,7 +53,7 @@ bootstrap:
       # atm (v1) hardcoded is one additional rawdb
             - state
 
-  # Mapping between IDP (Azure Active Directory) groups and CDF groups.
+    # Mapping between IDP (Azure Active Directory) groups and CDF groups.
     idp-cdf-mappings:
     # Support multiple CDF Projects, like dev/test/prod in one config.
         - cdf-project: cdf-bootcamp-05-test # i.e. bootcamp-01-test
@@ -80,11 +80,11 @@ bootstrap:
                 idp-source-id: 79b5464c-b18f-4f7f-85d9-b76d19e5a508
                 idp-source-name: bootcamp-05-prod-all-read
     namespaces:
-    # Typical config will have a namespace for data sources ("src") and a namespace for use cases ("uc")
+        # Typical config will have a namespace for data sources ("src") and a namespace for use cases ("uc")
         - ns-name: src
           description: Data sources for the Ice Cream Factory # HINT
 
-      # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
+          # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
           ns-nodes:
               - node-name: src:001:sap
                 description: Data from SAP # HINT
@@ -93,7 +93,7 @@ bootstrap:
         - ns-name: uc
           description: Data sources for the Ice Cream Factory # HINT
 
-      # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
+          # Node names will normally follow src:001:srcname or uc:001:usecasename naming convention
           ns-nodes:
               - node-name: uc:001:oee
                 description: Data from SAP # HINT
@@ -101,19 +101,23 @@ bootstrap:
                     read:
                         - node-name: src:001:sap
                         - node-name: src:002:opcua
-    # HINT: Add another namespace below
+        # HINT: Add another namespace below
 # de-facto standards for CDF CogniteClient and logger configuration.
 # Following the same parameter structure as the 'Cognite Python Extractor-Utilities'
 # and 'Cognite DB Extractor' configuration.
-cognite:
-    host: ${BOOTSTRAP_CDF_HOST}
-    project: ${BOOTSTRAP_CDF_PROJECT}
+cognite: # kwargs to pass to the CogniteClient, Environment variable format: ${ENVIRONMENT_VARIABLE_NAME}
+    # host: https://${BOOTSTRAP_CDF_CLUSTER}.cognitedata.com/
+    host: https://westeurope-1.cognitedata.com
+    project: cdf-bootcamp-05-prod
+    #
+    # AAD IdP login credentials:
+    #
     idp-authentication:
-        client-id: ${BOOTSTRAP_IDP_CLIENT_ID}
-        secret: ${BOOTSTRAP_IDP_CLIENT_SECRET}
+        client-id: 3e427a88-b1c8-4db5-8366-d2b70d56da8e
+        secret: CDU8Q~iYtopQBTOcQAJ8yY73ikYi~PqKzOestcwm
         scopes:
-            - ${BOOTSTRAP_IDP_SCOPES}
-        token_url: ${BOOTSTRAP_IDP_TOKEN_URL}
+            - https://westeurope-1.cognitedata.com/.default
+        token_url: https://login.microsoftonline.com/16e3985b-ebe8-4e24-9da4-933e21a9fc81/oauth2/v2.0/token
 logger:
     file:
         path: ./logs/bootstrap-cli-logs.log
