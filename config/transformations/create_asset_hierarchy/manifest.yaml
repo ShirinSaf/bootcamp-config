@@ -1,14 +1,18 @@
 ---
 # Manifest file downloaded from fusion
-externalId: tr-ts_assets_mapping
-name: ts_assets_mapping
+externalId: tr-create_asset_hierarchy
+name: create_asset_hierarchy
 query:
-    file: transformation.sql
+    - file: transformation.sql
 destination:
-    type: timeseries
+    type: asset_hierarchy
 ignoreNullFields: true
 shared: true
-action: update
+action: upsert
+schedule:
+    interval: 0 * * * *
+    isPaused: false
+dataSetExternalId: src:001:sap:ds
 # Specify credentials separately like this:
 # authentication:
 #   read:
@@ -32,16 +36,6 @@ action: update
 #     # Optional: If idP requires providing the audience
 #     audience: ${WRITE_CDF_AUDIENCE}
 # Or together like this:
-# authentication:
-#   clientId: ${CLIENT_ID}
-#   clientSecret: ${CLIENT_SECRET}
-#   tokenUrl: ${TOKEN_URL}
-#   # Optional: If idP requires providing the scopes
-#   cdfProjectName: ${CDF_PROJECT_NAME}
-#   scopes:
-#    - ${SCOPES}
-#   # Optional: If idP requires providing the audience
-#   audience: ${AUDIENCE}
 authentication:
     clientId: ${COGNITE_CLIENT_ID}
     clientSecret: ${COGNITE_CLIENT_SECRET}
@@ -50,3 +44,5 @@ authentication:
     cdfProjectName: ${CDF_PROJECT_NAME}
     scopes:
         - https://westeurope-1.cognitedata.com/.default
+#   # Optional: If idP requires providing the audience
+#   audience: ${AUDIENCE}
