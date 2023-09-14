@@ -3,7 +3,7 @@
 externalId: tr-create_asset_hierarchy
 name: create_asset_hierarchy
 query:
-    - file: transformation.sql
+    file: transformation.sql
 destination:
     type: asset_hierarchy
 ignoreNullFields: true
@@ -14,27 +14,7 @@ schedule:
     isPaused: false
 dataSetExternalId: src:001:sap:ds
 # Specify credentials separately like this:
-# authentication:
-#   read:
-#     clientId: ${READ_CLIENT_ID}
-#     clientSecret: ${READ_CLIENT_SECRET}
-#     tokenUrl: ${READ_TOKEN_URL}
-#     cdfProjectName: ${READ_CDF_PROJECT_NAME}
-#     # Optional: If idP requires providing the scopes
-#     scopes:
-#       - ${READ_SCOPES}
-#     # Optional: If idP requires providing the audience
-#     audience: ${READ_CDF_AUDIENCE}
-#   write:
-#     clientId: ${WRITE_CLIENT_ID}
-#     clientSecret: ${WRITE_CLIENT_SECRET}
-#     tokenUrl: ${WRITE_TOKEN_URL}
-#     cdfProjectName: ${WRITE_CDF_PROJECT_NAME}
-#     # Optional: If idP requires providing the scopes
-#     scopes:
-#       - ${WRITE_SCOPES}
-#     # Optional: If idP requires providing the audience
-#     audience: ${WRITE_CDF_AUDIENCE}
+# authentication
 # Or together like this:
 authentication:
     clientId: ${COGNITE_CLIENT_ID}
